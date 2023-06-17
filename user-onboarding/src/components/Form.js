@@ -1,64 +1,70 @@
+import React, { useState, useEffect } from 'react';
+import yup from 'yup';
+import axios from 'axios';
+import '../App.css'
 
+const Form = () => {
+  const [formData, setFormData] = useState({});
 
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
 
-const Form = props => {
-    const {
-        values
-    } = props
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
-    const onSubmit = evt => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-    }
+    axios.post('https://reqres.in/api/users', formData).then((response) => {
+      console.log(response);
+    });
+  };
 
-    const onChange = evt => {
-
-    }
-
-    return (
-        <form onSubmit={onSubmit}>
-            <label>First Name:
-                <input 
-                    value={values.first_name}
-                    name='first_name'
-                    type='text'
-                    onChange={onChange}
-                />
-            </label>
-            <label>Last Name:
-                <input 
-                    value={values.last_name}
-                    name='last_name'
-                    type='text'
-                    onChange={onChange}
-                />
-            </label>
-            <label>Email:
-                <input 
-                    value={values.email}
-                    name='email'
-                    type='text'
-                    onChange={onChange}
-                />
-            </label>
-            <label>Password:
-                <input 
-                    value={values.password}
-                    name='password'
-                    type='password'
-                    onChange={onChange}
-                />
-            </label>
-            <label>Terms of Service:
-                <input 
-                    checked={values.terms}
-                    name='terms'
-                    type='checkbox'
-                    onChange={onChange}
-                />
-            </label>
-            <button>Submit</button>
-        </form>
-    )
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>First Name:
+        <input 
+          name='first_name'
+          type='text'
+          onChange={handleChange}
+        />
+      </label>
+      <label>Last Name:
+        <input 
+          name='last_name'
+          type='text'
+          onChange={handleChange}
+        />
+      </label>
+      <label>Email:
+        <input 
+          name='email'
+          type='text'
+          onChange={handleChange}
+        />
+      </label>
+      <label>Password:
+        <input 
+          name='password'
+          type='password'
+          onChange={handleChange}
+        />
+      </label>
+      <label>Terms of Service:
+        <input 
+          checked={formData.terms}
+          name='terms'
+          type='checkbox'
+          onChange={handleChange}
+        />
+      </label>
+      <button>Submit</button>
+    </form>
+  );
 }
 
-export default Form
+export default Form;

@@ -13,10 +13,14 @@ const initFormValues = {
 }
 
 function App() {
+
+  const [formValues, setFormValues] = useState(initFormValues)
   return (
     <div className="container">
-      <Form />
+      <h1>Sign In</h1>
+      <Form first_name={formValues.first_name} last_name={formValues.last_name} email={formValues.email} password={formValues.password} terms={formValues.terms}/>
     </div>
+
   );
 }
 

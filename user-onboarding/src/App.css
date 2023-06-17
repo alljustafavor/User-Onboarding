@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+h1{
+  text-align: center;
+  margin-top: 20vh;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+  height: 8vh;
+  margin: 0 auto;
+  text-align: center;
+}
+
+form {
+  margin-top: 25vh;
+}
+
+button {
+  
+}
+
