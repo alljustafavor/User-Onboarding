@@ -1,70 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import yup from 'yup';
-import axios from 'axios';
-import '../App.css'
+import React from "react";
 
-const Form = () => {
-  const [formData, setFormData] = useState({});
+const Form = props => {
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
+  const { change, submit } = props;
+  const { username, email, password, tos } = props.values;
+  
+  const onChange = evt => {
+    const { name, value, checked, type } = evt.target
+    const newVal = type === 'checkbox' ? checked : value;
+    change(name, newVal)
+  }
 
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    axios.post('https://reqres.in/api/users', formData).then((response) => {
-      console.log(response);
-    });
-  };
+  const onSubmit = evt => {
+    evt.preventDefault();
+    submit();
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>First Name:
-        <input 
-          name='first_name'
-          type='text'
-          onChange={handleChange}
-        />
-      </label>
-      <label>Last Name:
-        <input 
-          name='last_name'
-          type='text'
-          onChange={handleChange}
-        />
-      </label>
-      <label>Email:
-        <input 
-          name='email'
-          type='text'
-          onChange={handleChange}
-        />
-      </label>
-      <label>Password:
-        <input 
-          name='password'
-          type='password'
-          onChange={handleChange}
-        />
-      </label>
-      <label>Terms of Service:
-        <input 
-          checked={formData.terms}
-          name='terms'
-          type='checkbox'
-          onChange={handleChange}
-        />
-      </label>
-      <button>Submit</button>
-    </form>
-  );
+    <div>
+      <h1>My From</h1>
+      <form onSubmit={submit} >
+        <label>Name:
+          <input 
+            type="text"
+            name="username"
+            value={username}
+            onChange={onChange}
+          />
+        </label>
+        <label>Email:
+          <input 
+            type="email"
+            name="email"
+            value={email}
+            onChange={onChange}
+          />
+        </label>
+        <label>Password:
+          <input 
+            type="password"
+            name="password"
+            value={password}
+            onChange={onChange}
+          />
+        </label>
+        <label>Terms of Service:
+          <input 
+            type="checkbox"
+            name="tos"
+            checked={tos}
+            onChange={onChange}
+          />
+        </label>
+        <input type="submit" value="Create a Friend" />
+      </form>
+    </div>  
+  )
 }
 
-export default Form;
+export default Form
