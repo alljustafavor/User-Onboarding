@@ -30,6 +30,7 @@ const Form = () => {
         <input 
           name='first_name'
           type='text'
+          data-cy="first-name"
           onChange={handleChange}
         />
       </label>
@@ -37,6 +38,7 @@ const Form = () => {
         <input 
           name='last_name'
           type='text'
+          data-cy="last-name"
           onChange={handleChange}
         />
       </label>
@@ -44,6 +46,7 @@ const Form = () => {
         <input 
           name='email'
           type='text'
+          data-cy="email"
           onChange={handleChange}
         />
       </label>
@@ -51,6 +54,7 @@ const Form = () => {
         <input 
           name='password'
           type='password'
+          data-cy="password"
           onChange={handleChange}
         />
       </label>
@@ -58,6 +62,7 @@ const Form = () => {
         <input 
           checked={formData.terms}
           name='terms'
+          data-cy="tos"
           type='checkbox'
           onChange={handleChange}
         />
