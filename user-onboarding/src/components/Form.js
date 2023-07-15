@@ -1,28 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import yup from 'yup';
-import axios from 'axios';
-import '../App.css'
+import React from "react";
 
-const Form = () => {
-  const [formData, setFormData] = useState({});
+const Form = props => {
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
+  const { change, submit, errors } = props;
+  const { username, email, password, tos } = props.values;
+  
+  const onChange = evt => {
+    const { name, value, checked, type } = evt.target
+    const newVal = type === 'checkbox' ? checked : value;
+    change(name, newVal)
+  }
 
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    axios.post('https://reqres.in/api/users', formData).then((response) => {
-      console.log(response);
-    });
-  };
+  const onSubmit = evt => {
+    evt.preventDefault();
+    submit();
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -72,4 +64,4 @@ const Form = () => {
   );
 }
 
-export default Form;
+export default Form
